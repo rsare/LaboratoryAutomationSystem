@@ -1,7 +1,6 @@
 package LaboratoryAutomationSystem;
 
-import CorePackage.MedicalAnalysis;
-import CorePackage.Patient;
+import jpa_Core.*;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

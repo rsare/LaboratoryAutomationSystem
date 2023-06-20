@@ -1,10 +1,6 @@
 package LaboratoryAutomationSystem;
 
-import CorePackage.Database;
-import CorePackage.Doctor;
-import CorePackage.MedicalAnalysis;
-import CorePackage.Person;
-import CorePackage.Patient;
+import jpa_Core.*;
 import java.util.Vector;
 import javax.sound.midi.Patch;
 import javax.swing.JOptionPane;
@@ -20,7 +16,7 @@ public class DoctorControlPage extends javax.swing.JFrame {
 
     //Doctor doctor = (Doctor) LoginAndRegisterPage.account;// EMİN DEĞİLİMMMMMMMMMMMMMMMMMMMMMMMMMM EMİRHANA SORRR!!!!!!!!!!!!!!! 36. SATIRDA KULLANILIYOR
     DefaultTableModel tableModel = new DefaultTableModel();
-    String[] columNames = {"ID", "Name", "Surname", "Phone", "Test Counts"};
+    String[] columNames = {"ID", "Name", "Surname", "Test Counts"};
 
     public DoctorControlPage() {
         initComponents();
@@ -43,15 +39,14 @@ public class DoctorControlPage extends javax.swing.JFrame {
     private void refreshTable() {
 
         tableModel.setRowCount(0);
-        for (Patient patient : doctorAcc.getMyPatients()) {
+        for (Patient patient : doctorAcc.getPatients()) {
 
             Vector rowData = new Vector();
 
             rowData.add(patient.getId());
             rowData.add(patient.getName());
             rowData.add(patient.getSurname());
-            rowData.add(patient.getPhone());
-            rowData.add(patient.getMyMedicalAnalysis().size());
+            rowData.add(patient.getAnalysisresultList().size());
 
             tableModel.addRow(rowData);
         }
@@ -169,26 +164,23 @@ public class DoctorControlPage extends javax.swing.JFrame {
             return;
         }
         int id = (Integer) tableModel.getValueAt(jTable1.getSelectedRow(), 0);
-        Patient patient = null;
-        for (Person person : Database.getPeople()) {
-            if (person.getId() == id) {
-                patient = (Patient) person;
-            }
-        }
+        Patient patient = (Patient) Database.getUserByID(id);
+        
+        
         if (patient == null) {
             JOptionPane.showMessageDialog(this, "This patient cannot found!", "Patient Not Selected", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String medicalAnalysisType = null;
+        
         if (buttonGroup1.isSelected(urineButton.getModel())) {
-            medicalAnalysisType = MedicalAnalysis.analysisType[1];
+            UrineAnalysis urineAnalysis = new UrineAnalysis();
+            Database.addAnalysis(urineAnalysis, doctorAcc, patient);
         } else {
-            medicalAnalysisType = MedicalAnalysis.analysisType[0];
+            BloodAnalysis bloodAnalysis = new BloodAnalysis();
+            Database.addAnalysis(bloodAnalysis, doctorAcc, patient);
         }
 
-        MedicalAnalysis ma = new MedicalAnalysis(patient, doctorAcc, medicalAnalysisType);
-        ma.setStatus(MedicalAnalysis.inProcess);
-        patient.getMyMedicalAnalysis().add(ma);
+        
         refreshTable();
     }//GEN-LAST:event_testRequestButtonActionPerformed
 

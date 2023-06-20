@@ -4,9 +4,7 @@
  */
 package LaboratoryAutomationSystem;
 
-import CorePackage.Doctor;
-import CorePackage.MedicalAnalysis;
-import CorePackage.Patient;
+import jpa_Core.*;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,8 +24,8 @@ public class ResultShowingForDoctor extends javax.swing.JFrame {
     public ResultShowingForDoctor(Doctor doctorAcc) {
         initComponents();
         this.doctorAcc = doctorAcc;
-        for (Patient myPatient : doctorAcc.getMyPatients()) {
-            for (MedicalAnalysis myMedicalAnalysis : myPatient.getMyMedicalAnalysis()) {
+        for (Patient myPatient : doctorAcc.getPatients()) {
+            for (Analysisresult myMedicalAnalysis : myPatient.getAnalysisresultList()) {
                 analysisComboBox.addItem(myMedicalAnalysis);
 
             }
@@ -41,9 +39,12 @@ public class ResultShowingForDoctor extends javax.swing.JFrame {
 
     public void refreshTable() {
         analysisTableModel.setRowCount(0);
-        MedicalAnalysis selectedMedicalAnalysis = (MedicalAnalysis) analysisComboBox.getSelectedItem();
+        Analysisresult selectedMedicalAnalysis = (Analysisresult) analysisComboBox.getSelectedItem();
+        for (String columnName : columnNames) {
+            
+        }
         for (int i = 0; i < selectedMedicalAnalysis.getResult().length; i++) {
-            if (selectedMedicalAnalysis.getMedicalAnalysisType().equals(MedicalAnalysis.analysisType[0])) {
+            if (selectedMedicalAnalysis.getMedicalAnalysisType().equals(Analysisresult.analysisType[0])) {
                 Vector vector = new Vector();
                 vector.add(MedicalAnalysis.bloodExaminations[i]);
                 vector.add(selectedMedicalAnalysis.getResult()[i]);

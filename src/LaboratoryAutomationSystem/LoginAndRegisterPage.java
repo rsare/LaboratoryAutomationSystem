@@ -1,6 +1,6 @@
 package LaboratoryAutomationSystem;
 
-import CorePackage.*;
+import jpa_Core.*;
 import LaboratoryAutomationSystem.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -293,10 +293,10 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
                     "Failure", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
-            Patient patient = new Patient(txtName.getText(), txtSurname.getText(), txtPasswordForRegister.getText(),
-                    txtUsernameForLogin.getText(), txtPhoneNo.getText());
+            
+               Patient patient = new Patient(txtName.getText(), txtSurname.getText(), txtUsernameForRegister.getText(),txtPasswordForRegister.getText());
 
-            Database.getPeople().add(patient);
+            Database.saveUser(patient);
             JOptionPane.showMessageDialog(this, "Successfully Created Patient Account ",
                     "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
 
@@ -357,42 +357,43 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                testInit();
+               // testInit();
+               Database.initEntitiyManager();
                 new LoginAndRegisterPage().setVisible(true);
             }
         });
     }
 
-    public static void testInit() {
-        //Default admin account
-        Doctor doctor1 = new Doctor("Zahid", "Baltacı", "123",
-                "zahid", "05360666561");
-        Doctor doctor2 = new Doctor("Emirhan", "Soylu", "123", "emirhan", "05063640557");
-
-        //Default lab attendant account
-        LabAttendant labAttendant1 = new LabAttendant("Sare", "Bayram", "123",
-                "sare", "05425923130");
-
-        //Default patient account
-        Patient patient1 = new Patient("Ahmet", "Ak", "123", "ahmet", "123232132");
-        patient1.setDoctor(doctor2);
-        doctor2.getMyPatients().add(patient1);
-        Patient patient2 = new Patient("Mehmet", "Ak", "123", "mehmet", "32322321");
-        patient2.setDoctor(doctor1);
-        doctor1.getMyPatients().add(patient2);
-        Patient patient3 = new Patient("Meryem", "Kılıç", "123", "meryemki", "05511365622");
-        patient3.setDoctor(doctor2);
-        doctor2.getMyPatients().add(patient3);
-
-        Database.getPeople().add(doctor1);
-        Database.getPeople().add(doctor2);
-
-        Database.getPeople().add(labAttendant1);
-
-        Database.getPeople().add(patient1);
-        Database.getPeople().add(patient2);
-        Database.getPeople().add(patient3);
-    }
+//    public static void testInit() {
+//        //Default admin account
+//        Doctor doctor1 = new Doctor("Zahid", "Baltacı", "123",
+//                "zahid", "05360666561");
+//        Doctor doctor2 = new Doctor("Emirhan", "Soylu", "123", "emirhan", "05063640557");
+//
+//        //Default lab attendant account
+//        LabAttendant labAttendant1 = new LabAttendant("Sare", "Bayram", "123",
+//                "sare", "05425923130");
+//
+//        //Default patient account
+//        Patient patient1 = new Patient("Ahmet", "Ak", "123", "ahmet", "123232132");
+//        patient1.setDoctor(doctor2);
+//        doctor2.getMyPatients().add(patient1);
+//        Patient patient2 = new Patient("Mehmet", "Ak", "123", "mehmet", "32322321");
+//        patient2.setDoctor(doctor1);
+//        doctor1.getMyPatients().add(patient2);
+//        Patient patient3 = new Patient("Meryem", "Kılıç", "123", "meryemki", "05511365622");
+//        patient3.setDoctor(doctor2);
+//        doctor2.getMyPatients().add(patient3);
+//
+//        Database.getPeople().add(doctor1);
+//        Database.getPeople().add(doctor2);
+//
+//        Database.getPeople().add(labAttendant1);
+//
+//        Database.getPeople().add(patient1);
+//        Database.getPeople().add(patient2);
+//        Database.getPeople().add(patient3);
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton doctorRegisterButton;

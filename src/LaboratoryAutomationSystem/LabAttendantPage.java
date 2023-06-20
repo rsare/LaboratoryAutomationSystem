@@ -1,8 +1,6 @@
 package LaboratoryAutomationSystem;
 
-import CorePackage.Database;
-import CorePackage.LabAttendant;
-import CorePackage.*;
+import jpa_Core.*;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
 import javax.swing.JOptionPane;

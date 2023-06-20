@@ -1,7 +1,6 @@
 package LaboratoryAutomationSystem;
 
 import CorePackage.MedicalAnalysis;
-import java.awt.event.WindowEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
