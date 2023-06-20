@@ -24,8 +24,9 @@ public class Test {
         //addPerson();
         //addAnalysis();
         //addAnalysisResult();
-        //queryAnalysisResult();
-        addPatientToDoctor();
+        queryAnalysisResult();
+        //addPatientToDoctor();
+       // showMedicalAnalysis();
     }
     
     public static void addPerson() {
@@ -95,7 +96,11 @@ public class Test {
         System.out.println(analysisresult.getDoctorId().getName());
         Doctor doctor = em.createNamedQuery("Person.findByName", Doctor.class).setParameter("name", "Emirhan").getSingleResult();
         System.out.println(doctor.getAnalysisresultList1().get(0));
-        
+        Patient patient = em.find(Patient.class, 1);
+//        for (Analysisresult analysisresult1 : patient.getAnalysisresultList()) {
+//            System.out.println(analysisresult1.toString());
+//            
+//        }
     }
     
     public static void addPatientToDoctor() {
@@ -113,5 +118,18 @@ public class Test {
         
         em.getTransaction().commit();
     }
+    
+    
+    public static void showMedicalAnalysis(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("LaboratoryAutomationSystem");
+        EntityManager em = emf.createEntityManager();
+        
+        Patient patient = em.find(Patient.class, 1);
+        System.out.println(patient.getAnalysisresultList().get(0));
+        
+        
+    }
+    
+    
     
 }

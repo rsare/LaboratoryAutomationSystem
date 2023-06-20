@@ -1,7 +1,6 @@
 package LaboratoryAutomationSystem;
 
-import CorePackage.Database;
-import CorePackage.LabAttendant;
+import jpa_Core.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +15,7 @@ public class AuthenticationPageForLabAttendant extends javax.swing.JFrame {
     String password;
     String phoneNo;
 
-    public AuthenticationPageForLabAttendant(String name, String surname, String username, String password, String phoneNo) {
+    public AuthenticationPageForLabAttendant(String name, String surname, String username, String password) {
         initComponents();
         setLocationRelativeTo(null);
 
@@ -24,7 +23,6 @@ public class AuthenticationPageForLabAttendant extends javax.swing.JFrame {
         this.surname = surname;
         this.username = username;
         this.password = password;
-        this.phoneNo = phoneNo;
         setLocationRelativeTo(null);
     }
 
@@ -97,9 +95,7 @@ public class AuthenticationPageForLabAttendant extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Successfully Created Lab Attendant Account ",
                     "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
 
-            LabAttendant labAttendant = new LabAttendant(loginAndRegister.txtName.getText(), loginAndRegister.txtSurname.getText(),
-                    password, username,
-                    loginAndRegister.txtPhoneNo.getText());
+            LabAttendant labAttendant = new LabAttendant(name, surname,password, username);
             Database.getPeople().add(labAttendant);
 
             loginAndRegister.show();

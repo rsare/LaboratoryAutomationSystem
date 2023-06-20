@@ -15,7 +15,7 @@ public class LabAttendantPage extends javax.swing.JFrame {
     LabAttendant labAttandentAcc;
 
     DefaultTableModel tableModel = new DefaultTableModel();
-    String[] columNames = {"ID", "Patient", "Status", "Doctor"};
+    String[] columNames = {"ID", "Patient", "Doctor", "Analysis Type"};
 
     public LabAttendantPage(LabAttendant labAttendant) {
         initComponents();
@@ -31,12 +31,12 @@ public class LabAttendantPage extends javax.swing.JFrame {
         tableModel.setRowCount(0);
         for (Person person : Database.getPeople()) {
             if (person instanceof Patient patient) {
-                for (MedicalAnalysis medicalAnalysis : patient.getMyMedicalAnalysis()) {
+                for (Analysisresult medicalAnalysis : patient.getAnalysisresultList()) {
                     Vector data = new Vector();
-                    data.add(medicalAnalysis.getMedicalAnalysisId());
-                    data.add(medicalAnalysis.getPatient());
-                    data.add(medicalAnalysis.getStatus());
-                    data.add(medicalAnalysis.getDoctor());
+                    data.add(medicalAnalysis.getId());
+                    data.add(medicalAnalysis.getPatientId().getName());
+                    data.add(medicalAnalysis.getDoctorId().getName());
+                    data.add(medicalAnalysis.getAnalysisType());
                     tableModel.addRow(data);
                 }
             }
@@ -130,15 +130,14 @@ public class LabAttendantPage extends javax.swing.JFrame {
     }//GEN-LAST:event_logOutButtonActionPerformed
 
     private void concludeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_concludeButtonActionPerformed
-        MedicalAnalysis medicalAnalysis = null;
+        Analysisresult medicalAnalysis = null;
         tableModel.getValueAt(jTable1.getSelectedRow(), 0);
         for (Person person : Database.getPeople()) {
             if (person instanceof Patient) {
                 Patient patient = (Patient) person;
-                for (MedicalAnalysis medicalAnalysis1 : patient.getMyMedicalAnalysis()) {
-                    if ((Integer) tableModel.getValueAt(jTable1.getSelectedRow(), 0) == medicalAnalysis1.getMedicalAnalysisId()) {
-                        medicalAnalysis = medicalAnalysis1;
-                    }
+                for (Analysisresult medicalAnalysis1 : patient.getAnalysisresultList()) {
+                    medicalAnalysis1 = Database.findAnalysisResultByID((Integer) tableModel.getValueAt(jTable1.getSelectedRow(), 0));
+                    medicalAnalysis = medicalAnalysis1;
 
                 }
             }
@@ -147,7 +146,7 @@ public class LabAttendantPage extends javax.swing.JFrame {
         ChoosingAnalysis choosingAnalysis = new ChoosingAnalysis(medicalAnalysis, this);
         choosingAnalysis.dispatchEvent(new WindowEvent(choosingAnalysis, WindowEvent.WINDOW_CLOSING));
         choosingAnalysis.show();
-        
+
 
     }//GEN-LAST:event_concludeButtonActionPerformed
 

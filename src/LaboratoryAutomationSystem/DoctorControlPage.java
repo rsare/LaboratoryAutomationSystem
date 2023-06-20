@@ -14,7 +14,7 @@ public class DoctorControlPage extends javax.swing.JFrame {
 
     Doctor doctorAcc;
 
-    //Doctor doctor = (Doctor) LoginAndRegisterPage.account;// EMİN DEĞİLİMMMMMMMMMMMMMMMMMMMMMMMMMM EMİRHANA SORRR!!!!!!!!!!!!!!! 36. SATIRDA KULLANILIYOR
+    //Doctor doctor = (Doctor) LoginAndRegisterPage.account;
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Name", "Surname", "Test Counts"};
 

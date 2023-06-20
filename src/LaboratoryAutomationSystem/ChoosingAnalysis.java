@@ -1,12 +1,12 @@
 package LaboratoryAutomationSystem;
 
-import CorePackage.MedicalAnalysis;
+import jpa_Core.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class ChoosingAnalysis extends javax.swing.JFrame {
     
-    MedicalAnalysis medicalAnalysis;
+    Analysisresult medicalAnalysis;
     LabAttendantPage labAttendantPage;
     
     DefaultListModel lowDefaultListModel = new DefaultListModel();
@@ -15,7 +15,7 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
     
     public ChoosingAnalysis() {
         initComponents();
-        for (String urineExaminations : MedicalAnalysis.urineExaminations) {
+        for (String urineExaminations : Analysisresult.urineExaminations) {
             testTypeComboBox.addItem(urineExaminations);
         }
         jListLow.setModel(lowDefaultListModel);
@@ -25,17 +25,17 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
         
     }
     
-    public ChoosingAnalysis(MedicalAnalysis medicalAnalysis, LabAttendantPage labAttendantPage) {
+    public ChoosingAnalysis(Analysisresult medicalAnalysis, LabAttendantPage labAttendantPage) {
         initComponents();
         this.labAttendantPage = labAttendantPage;
         testTypeComboBox.removeAllItems();
-        if (medicalAnalysis.getMedicalAnalysisType().equals(MedicalAnalysis.analysisType[0])) {
-            for (String bloodExamination : MedicalAnalysis.bloodExaminations) {
+        if (medicalAnalysis.getAnalysisType().equals(Analysisresult.analysisTypes[0])) {
+            for (String bloodExamination : Analysisresult.bloodExaminations) {
                 testTypeComboBox.addItem(bloodExamination);
                 this.medicalAnalysis = medicalAnalysis;
             }
         } else {
-            for (String urineExaminations : MedicalAnalysis.urineExaminations) {
+            for (String urineExaminations : Analysisresult.urineExaminations) {
                 testTypeComboBox.addItem(urineExaminations);
             }
             this.medicalAnalysis = medicalAnalysis;
@@ -49,17 +49,17 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
     }
     
     public void refreshList() {
-        if (medicalAnalysis.getMedicalAnalysisType().equals(MedicalAnalysis.analysisType[0])) {
+        if (medicalAnalysis.getAnalysisType().equals(Analysisresult.analysisTypes[0])) {
             for (int i = 0; i < medicalAnalysis.getResult().length; i++) {
                 if (medicalAnalysis.getResult()[i] == null) {
                     continue;
                 }
-                if (medicalAnalysis.getResult()[i].equals(MedicalAnalysis.low)) {
-                    lowDefaultListModel.addElement(MedicalAnalysis.bloodExaminations[i]);
-                } else if (medicalAnalysis.getResult()[i].equals(MedicalAnalysis.normal)) {
-                    normalDefaultListModel.addElement(MedicalAnalysis.bloodExaminations[i]);
+                if (medicalAnalysis.getResult()[i].equals(Analysisresult.low)) {
+                    lowDefaultListModel.addElement(Analysisresult.bloodExaminations[i]);
+                } else if (medicalAnalysis.getResult()[i].equals(Analysisresult.normal)) {
+                    normalDefaultListModel.addElement(Analysisresult.bloodExaminations[i]);
                 } else {
-                    highDefaultListModel.addElement(MedicalAnalysis.bloodExaminations[i]);
+                    highDefaultListModel.addElement(Analysisresult.bloodExaminations[i]);
                 }
             }
             
@@ -68,12 +68,12 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
                 if (medicalAnalysis.getResult()[i] == null) {
                     continue;
                 }
-                if (medicalAnalysis.getResult()[i].equals(MedicalAnalysis.low)) {
-                    lowDefaultListModel.addElement(MedicalAnalysis.urineExaminations[i]);
-                } else if (medicalAnalysis.getResult()[i].equals(MedicalAnalysis.normal)) {
-                    normalDefaultListModel.addElement(MedicalAnalysis.urineExaminations[i]);
+                if (medicalAnalysis.getResult()[i].equals(Analysisresult.low)) {
+                    lowDefaultListModel.addElement(Analysisresult.urineExaminations[i]);
+                } else if (medicalAnalysis.getResult()[i].equals(Analysisresult.normal)) {
+                    normalDefaultListModel.addElement(Analysisresult.urineExaminations[i]);
                 } else {
-                    highDefaultListModel.addElement(MedicalAnalysis.urineExaminations[i]);
+                    highDefaultListModel.addElement(Analysisresult.urineExaminations[i]);
                 }
                 
             }
@@ -304,13 +304,13 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
         }
         if (resultValueComboBox.getSelectedItem() == "Low (<5)") {
             lowDefaultListModel.addElement(testTypeComboBox.getSelectedItem());
-            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = MedicalAnalysis.low;
+            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = Analysisresult.low;
         } else if (resultValueComboBox.getSelectedItem() == "Normal") {
             normalDefaultListModel.addElement(testTypeComboBox.getSelectedItem());
-            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = MedicalAnalysis.normal;
+            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = Analysisresult.normal;
         } else {
             highDefaultListModel.addElement(testTypeComboBox.getSelectedItem());
-            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = MedicalAnalysis.high;
+            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = Analysisresult.high;
         }
         
 
@@ -323,8 +323,8 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
         }
         String selectedValue = jListLow.getSelectedValue();
         int index;
-        for (int i = 0; i < MedicalAnalysis.bloodExaminations.length; i++) {
-            if (selectedValue.equals(MedicalAnalysis.bloodExaminations[i]) || selectedValue.equals(MedicalAnalysis.urineExaminations[i])) {
+        for (int i = 0; i < Analysisresult.bloodExaminations.length; i++) {
+            if (selectedValue.equals(Analysisresult.bloodExaminations[i]) || selectedValue.equals(Analysisresult.urineExaminations[i])) {
                 medicalAnalysis.getResult()[i] = "";
             }
             
@@ -340,8 +340,8 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
         }
         String selectedValue = jListNormal.getSelectedValue();
         int index;
-        for (int i = 0; i < MedicalAnalysis.bloodExaminations.length; i++) {
-            if (selectedValue.equals(MedicalAnalysis.bloodExaminations[i]) || selectedValue.equals(MedicalAnalysis.urineExaminations[i])) {
+        for (int i = 0; i < Analysisresult.bloodExaminations.length; i++) {
+            if (selectedValue.equals(Analysisresult.bloodExaminations[i]) || selectedValue.equals(Analysisresult.urineExaminations[i])) {
                 medicalAnalysis.getResult()[i] = "";
             }
             
@@ -356,8 +356,8 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
         }
         String selectedValue = jListHigh.getSelectedValue();
         int index;
-        for (int i = 0; i < MedicalAnalysis.bloodExaminations.length; i++) {
-            if (selectedValue.equals(MedicalAnalysis.bloodExaminations[i]) || selectedValue.equals(MedicalAnalysis.urineExaminations[i])) {
+        for (int i = 0; i < Analysisresult.bloodExaminations.length; i++) {
+            if (selectedValue.equals(Analysisresult.bloodExaminations[i]) || selectedValue.equals(Analysisresult.urineExaminations[i])) {
                 medicalAnalysis.getResult()[i] = "";
             }
             
@@ -379,13 +379,13 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
         }
         if (resultValueComboBox.getSelectedItem() == "Low (<5)") {
             lowDefaultListModel.addElement(testTypeComboBox.getSelectedItem());
-            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = MedicalAnalysis.low;
+            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = Analysisresult.low;
         } else if (resultValueComboBox.getSelectedItem() == "Normal") {
             normalDefaultListModel.addElement(testTypeComboBox.getSelectedItem());
-            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = MedicalAnalysis.normal;
+            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = Analysisresult.normal;
         } else {
             highDefaultListModel.addElement(testTypeComboBox.getSelectedItem());
-            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = MedicalAnalysis.high;
+            medicalAnalysis.getResult()[testTypeComboBox.getSelectedIndex()] = Analysisresult.high;
         }
         
 
@@ -400,7 +400,7 @@ public class ChoosingAnalysis extends javax.swing.JFrame {
             }
         }
         if (control == true) {
-            medicalAnalysis.setStatus(MedicalAnalysis.testsConcluded);            
+            medicalAnalysis.setStatus(Analysisresult.testsConcluded);            
             
         }
         labAttendantPage.refreshTable();

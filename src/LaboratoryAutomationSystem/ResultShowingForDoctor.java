@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package LaboratoryAutomationSystem;
 
 import jpa_Core.*;
@@ -44,18 +40,18 @@ public class ResultShowingForDoctor extends javax.swing.JFrame {
             
         }
         for (int i = 0; i < selectedMedicalAnalysis.getResult().length; i++) {
-            if (selectedMedicalAnalysis.getMedicalAnalysisType().equals(Analysisresult.analysisType[0])) {
+            if (selectedMedicalAnalysis.getAnalysisType().equals(Analysisresult.analysisTypes[0])) {
                 Vector vector = new Vector();
-                vector.add(MedicalAnalysis.bloodExaminations[i]);
+                vector.add(Analysisresult.bloodExaminations[i]);
                 vector.add(selectedMedicalAnalysis.getResult()[i]);
-                vector.add(selectedMedicalAnalysis.getDoctor());
+                vector.add(selectedMedicalAnalysis.getDoctorId().getName());
                 analysisTableModel.addRow(vector);
 
             } else {
                 Vector vector = new Vector();
-                vector.add(MedicalAnalysis.urineExaminations[i]);
+                vector.add(Analysisresult.urineExaminations[i]);
                 vector.add(selectedMedicalAnalysis.getResult()[i]);
-                vector.add(selectedMedicalAnalysis.getDoctor());
+                vector.add(selectedMedicalAnalysis.getDoctorId().getName());
                 analysisTableModel.addRow(vector);
 
             }
@@ -188,10 +184,10 @@ public class ResultShowingForDoctor extends javax.swing.JFrame {
 
     private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
         Pattern pattern = Pattern.compile(jTextField1.getText());
-        for (Patient myPatient : doctorAcc.getMyPatients()) {
-            for (MedicalAnalysis myMedicalAnalysis : myPatient.getMyMedicalAnalysis()) {
+        for (Patient myPatient : doctorAcc.getPatients()) {
+            for (Analysisresult myMedicalAnalysis : myPatient.getAnalysisresultList()) {
                 
-                Matcher matcher = pattern.matcher(myMedicalAnalysis.getPatient().toString());
+                Matcher matcher = pattern.matcher(myMedicalAnalysis.getPatientId().toString());
                 if(matcher.find()){
                     
                     analysisComboBox.setSelectedItem(myMedicalAnalysis);

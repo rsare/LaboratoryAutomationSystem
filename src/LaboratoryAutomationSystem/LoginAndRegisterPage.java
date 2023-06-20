@@ -2,6 +2,7 @@ package LaboratoryAutomationSystem;
 
 import jpa_Core.*;
 import LaboratoryAutomationSystem.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -12,6 +13,9 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
     public LoginAndRegisterPage() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        ImageIcon icon = new ImageIcon("C:\\Users\\bayra\\OneDrive\\Masaüstü\\WhatsApp Görsel 2023-06-20 saat 21.04.12.jpg");
+        this.setIconImage(icon.getImage());
     }
 
     @SuppressWarnings("unchecked")
@@ -26,8 +30,6 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
         surnameLabel = new javax.swing.JLabel();
         passwordForSıgnUpLabel = new javax.swing.JLabel();
         usernameforSıgnUpLabel = new javax.swing.JLabel();
-        phoneNoLabel = new javax.swing.JLabel();
-        txtPhoneNo = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtSurname = new javax.swing.JTextField();
         txtPasswordForRegister = new javax.swing.JPasswordField();
@@ -88,16 +90,6 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
         usernameforSıgnUpLabel.setText("Username :");
         registerPanel.add(usernameforSıgnUpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 76, 30));
 
-        phoneNoLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        phoneNoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        phoneNoLabel.setText("Phone No :");
-        registerPanel.add(phoneNoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 76, 30));
-
-        txtPhoneNo.setBackground(new java.awt.Color(204, 204, 204));
-        txtPhoneNo.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txtPhoneNo.setForeground(new java.awt.Color(76, 76, 76));
-        registerPanel.add(txtPhoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 143, 30));
-
         txtName.setBackground(new java.awt.Color(204, 204, 204));
         txtName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txtName.setForeground(new java.awt.Color(76, 76, 76));
@@ -126,7 +118,7 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
                 labAttendantRegisterButtonActionPerformed(evt);
             }
         });
-        registerPanel.add(labAttendantRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 305, 150, 30));
+        registerPanel.add(labAttendantRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 150, 30));
 
         patientRegisterButton.setBackground(new java.awt.Color(86, 142, 255));
         patientRegisterButton.setFont(new java.awt.Font("SansSerif", 0, 8)); // NOI18N
@@ -137,7 +129,7 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
                 patientRegisterButtonActionPerformed(evt);
             }
         });
-        registerPanel.add(patientRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 120, 30));
+        registerPanel.add(patientRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 120, 30));
 
         doctorRegisterButton.setBackground(new java.awt.Color(86, 142, 255));
         doctorRegisterButton.setFont(new java.awt.Font("SansSerif", 0, 8)); // NOI18N
@@ -148,9 +140,9 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
                 doctorRegisterButtonActionPerformed(evt);
             }
         });
-        registerPanel.add(doctorRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 120, 30));
+        registerPanel.add(doctorRegisterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 120, 30));
 
-        jPanel1.add(registerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 270, 340));
+        jPanel1.add(registerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 270, 340));
 
         sıgnInPanel.setBackground(new java.awt.Color(255, 255, 255));
         sıgnInPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -192,8 +184,6 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
         sıgnInPanel.add(sıgnInButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 292, 120, 30));
 
         jPanel1.add(sıgnInPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 270, 340));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\bayra\\OneDrive\\Masaüstü\\logo\\gerçekten son.png")); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 110, 70));
 
         jTextField1.setBackground(new java.awt.Color(0, 153, 255));
@@ -239,7 +229,7 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
             txtUsernameForLogin.setText("");
             txtPasswordForLogin.setText("");
 
-            PatientControlPage patientControlPage = new PatientControlPage((Patient)acc);
+            PatientControlPage patientControlPage = new PatientControlPage((Patient) acc);
             patientControlPage.show();
             dispose();
 
@@ -251,14 +241,13 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
             LabAttendantPage labAttendantPage = new LabAttendantPage(labAttendant);
             labAttendantPage.show();
             dispose();
-            
 
         }
     }//GEN-LAST:event_sıgnInButtonActionPerformed
 
     private void doctorRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorRegisterButtonActionPerformed
         if (txtUsernameForRegister.getText().equals("") || txtPasswordForRegister.getText().equals("") || txtName.getText().equals("")
-                || txtPhoneNo.getText().equals("") || txtSurname.getText().equals("")) {
+                || txtSurname.getText().equals("")) {
 
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.INFORMATION_MESSAGE);
@@ -272,7 +261,7 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
                     "Authentication", JOptionPane.INFORMATION_MESSAGE);
 
             AuthenticationPageForDoctor authenticationPage = new AuthenticationPageForDoctor(txtName.getText(), txtSurname.getText(),
-                    txtUsernameForRegister.getText(), txtPasswordForRegister.getText(), txtPhoneNo.getText());
+                    txtUsernameForRegister.getText(), txtPasswordForRegister.getText());
             authenticationPage.show();
             dispose();
 
@@ -283,7 +272,7 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
 
     private void patientRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientRegisterButtonActionPerformed
         if (txtUsernameForRegister.getText().equals("") || txtPasswordForRegister.getText().equals("") || txtName.getText().equals("")
-                || txtPhoneNo.getText().equals("") || txtSurname.getText().equals("")) {
+                || txtSurname.getText().equals("")) {
 
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.INFORMATION_MESSAGE);
@@ -293,8 +282,8 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
                     "Failure", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
-            
-               Patient patient = new Patient(txtName.getText(), txtSurname.getText(), txtUsernameForRegister.getText(),txtPasswordForRegister.getText());
+
+            Patient patient = new Patient(txtName.getText(), txtSurname.getText(), txtUsernameForRegister.getText(), txtPasswordForRegister.getText());
 
             Database.saveUser(patient);
             JOptionPane.showMessageDialog(this, "Successfully Created Patient Account ",
@@ -303,7 +292,6 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
             txtUsernameForRegister.setText("");
             txtPasswordForRegister.setText("");
             txtName.setText("");
-            txtPhoneNo.setText("");
             txtSurname.setText("");
 
         }
@@ -311,7 +299,7 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
 
     private void labAttendantRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labAttendantRegisterButtonActionPerformed
         if (txtUsernameForRegister.getText().equals("") || txtPasswordForRegister.getText().equals("") || txtName.getText().equals("")
-                || txtPhoneNo.getText().equals("") || txtSurname.getText().equals("")) {
+                || txtSurname.getText().equals("")) {
 
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.INFORMATION_MESSAGE);
@@ -325,7 +313,7 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
                     "Authentication", JOptionPane.INFORMATION_MESSAGE);
 
             AuthenticationPageForLabAttendant authenticationPage = new AuthenticationPageForLabAttendant(txtName.getText(), txtSurname.getText(),
-                    txtUsernameForRegister.getText(), txtPasswordForRegister.getText(), txtPhoneNo.getText());
+                    txtUsernameForRegister.getText(), txtPasswordForRegister.getText());
             authenticationPage.show();
             dispose();
 
@@ -357,8 +345,8 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // testInit();
-               Database.initEntitiyManager();
+                // testInit();
+                //Database.initEntitiyManager();
                 new LoginAndRegisterPage().setVisible(true);
             }
         });
@@ -406,7 +394,6 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
     private javax.swing.JLabel passwordForSıgnUpLabel;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton patientRegisterButton;
-    private javax.swing.JLabel phoneNoLabel;
     private javax.swing.JPanel registerPanel;
     private javax.swing.JLabel surnameLabel;
     private javax.swing.JButton sıgnInButton;
@@ -416,7 +403,6 @@ public class LoginAndRegisterPage extends javax.swing.JFrame {
     protected javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPasswordForLogin;
     protected javax.swing.JPasswordField txtPasswordForRegister;
-    protected javax.swing.JTextField txtPhoneNo;
     protected javax.swing.JTextField txtSurname;
     private javax.swing.JTextField txtUsernameForLogin;
     protected javax.swing.JTextField txtUsernameForRegister;

@@ -13,7 +13,7 @@ public class PatientControlPage extends javax.swing.JFrame {
     public PatientControlPage(Patient patient) {
         initComponents();
         setLocationRelativeTo(null);
-        for (MedicalAnalysis medicalAnalysis : patient.getMyMedicalAnalysis()) {
+       for (Analysisresult medicalAnalysis : patient.getAnalysisresultList()) {
             analysisComboBox.addItem(medicalAnalysis);
 
         }
@@ -23,26 +23,120 @@ public class PatientControlPage extends javax.swing.JFrame {
     }
 
     public void refreshtable() {
+        System.out.println("metodun başındayım");
         analysisTableModel.setRowCount(0);
-        MedicalAnalysis selectedMedicalAnalysis = (MedicalAnalysis) analysisComboBox.getSelectedItem();
-        for (int i = 0; i < selectedMedicalAnalysis.getResult().length; i++) {
-            if (selectedMedicalAnalysis.getMedicalAnalysisType().equals(MedicalAnalysis.analysisType[0])) {
-                Vector vector = new Vector();
-                vector.add(MedicalAnalysis.bloodExaminations[i]);
-                vector.add(selectedMedicalAnalysis.getResult()[i]);
-                vector.add(selectedMedicalAnalysis.getDoctor());
-                analysisTableModel.addRow(vector);
+        Analysisresult selectedMedicalAnalysis = (Analysisresult) analysisComboBox.getSelectedItem();
 
-            } else {
-                Vector vector = new Vector();
-                vector.add(MedicalAnalysis.urineExaminations[i]);
-                vector.add(selectedMedicalAnalysis.getResult()[i]);
-                vector.add(selectedMedicalAnalysis.getDoctor());
-                analysisTableModel.addRow(vector);
-
-            }
-
+        if(selectedMedicalAnalysis.getAnalysisId() instanceof BloodAnalysis){
+            System.out.println("başındayım");
+            Vector vector = new Vector();
+            vector.add(Analysisresult.bloodExaminations[0]);
+            vector.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getWbc());
+            Vector vector1 = new Vector();
+            vector1.add(Analysisresult.bloodExaminations[1]);
+            vector1.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getNeu());
+            Vector vector2 = new Vector();
+            vector2.add(Analysisresult.bloodExaminations[2]);
+            vector2.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getLym());
+            Vector vector3 = new Vector();
+            vector3.add(Analysisresult.bloodExaminations[3]);
+            vector3.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getMono());
+            Vector vector4 = new Vector();
+            vector4.add(Analysisresult.bloodExaminations[4]);
+            vector4.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getEos());
+            Vector vector5 = new Vector();
+            vector5.add(Analysisresult.bloodExaminations[5]);
+            vector5.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getBaso());
+            Vector vector6 = new Vector();
+            vector6.add(Analysisresult.bloodExaminations[6]);
+            vector6.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getRbc());
+            Vector vector7 = new Vector();
+            vector7.add(Analysisresult.bloodExaminations[7]);
+            vector7.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getHgb());
+            Vector vector8 = new Vector();
+            vector8.add(Analysisresult.bloodExaminations[8]);
+            vector8.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getHct());
+            Vector vector9 = new Vector();
+            vector9.add(Analysisresult.bloodExaminations[9]);
+            vector9.add(((BloodAnalysis)selectedMedicalAnalysis.getAnalysisId()).getMcv());
+            vector.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector1.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector2.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector3.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector4.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector5.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector6.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector7.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector8.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector9.add(selectedMedicalAnalysis.getDoctorId().getName());
+            analysisTableModel.addRow(vector);
+            analysisTableModel.addRow(vector1);
+            analysisTableModel.addRow(vector2);
+            analysisTableModel.addRow(vector3);
+            analysisTableModel.addRow(vector4);
+            analysisTableModel.addRow(vector5);
+            analysisTableModel.addRow(vector6);
+            analysisTableModel.addRow(vector7);
+            analysisTableModel.addRow(vector8);
+            analysisTableModel.addRow(vector9);
+        }else if(selectedMedicalAnalysis.getAnalysisId() instanceof UrineAnalysis){
+            System.out.println("else ifin başındayım");
+             Vector vector = new Vector();
+            vector.add(Analysisresult.urineExaminations[0]);
+            vector.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getGlukoz());
+            Vector vector1 = new Vector();
+            vector1.add(Analysisresult.urineExaminations[1]);
+            vector1.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getProtein());
+            Vector vector2 = new Vector();
+            vector2.add(Analysisresult.urineExaminations[2]);
+            vector2.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getBilirubin());
+            Vector vector3 = new Vector();
+            vector3.add(Analysisresult.urineExaminations[3]);
+            vector3.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getUrobilinojen());
+            Vector vector4 = new Vector();
+            vector4.add(Analysisresult.urineExaminations[4]);
+            vector4.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getPh());
+            Vector vector5 = new Vector();
+            vector5.add(Analysisresult.urineExaminations[5]);
+            vector5.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getHemoglobin());
+            Vector vector6 = new Vector();
+            vector6.add(Analysisresult.urineExaminations[6]);
+            vector6.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getKeton());
+            Vector vector7 = new Vector();
+            vector7.add(Analysisresult.urineExaminations[7]);
+            vector7.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getNitrit());
+            Vector vector8 = new Vector();
+            vector8.add(Analysisresult.urineExaminations[8]);
+            vector8.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getLokositEsteraz());
+            Vector vector9 = new Vector();
+            vector9.add(Analysisresult.urineExaminations[9]);
+            vector9.add(((UrineAnalysis)selectedMedicalAnalysis.getAnalysisId()).getDansite());
+            vector.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector1.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector2.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector3.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector4.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector5.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector6.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector7.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector8.add(selectedMedicalAnalysis.getDoctorId().getName());
+            vector9.add(selectedMedicalAnalysis.getDoctorId().getName());
+            analysisTableModel.addRow(vector);
+            analysisTableModel.addRow(vector1);
+            analysisTableModel.addRow(vector2);
+            analysisTableModel.addRow(vector3);
+            analysisTableModel.addRow(vector4);
+            analysisTableModel.addRow(vector5);
+            analysisTableModel.addRow(vector6);
+            analysisTableModel.addRow(vector7);
+            analysisTableModel.addRow(vector8);
+            analysisTableModel.addRow(vector9);
         }
+        
+        
+        
+        
+        
 
     }
 

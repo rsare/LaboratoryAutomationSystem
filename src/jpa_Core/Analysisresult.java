@@ -32,6 +32,22 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Analysisresult.findByDate", query = "SELECT a FROM Analysisresult a WHERE a.date = :date")})
 public class Analysisresult implements Serializable {
 
+    public final static String[] analysisTypes = {"Blood Analysis", "Urine Test"};
+
+    public final static String[] bloodExaminations = {"WBC", "NEU", "LYM", "MONO", "EOS",
+        "BASO", "RBC", "HGB", "HCT", "MCV"};
+
+    public final static String[] urineExaminations = {"Glukoz", "Protein", "Bilirubin",
+        "Urobilinojen", "pH", "Hemoglobin", "Keton", "Nitrit", "Lokosit Esteraz", "Dansite"};
+
+    public final static String low = "Low";
+    public final static String normal = "Normal";
+    public final static String high = "High";
+
+    //For status
+    public final static String inProcess = "In Process";
+    public final static String testsConcluded = "Tests Concluded";
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
@@ -56,21 +72,19 @@ public class Analysisresult implements Serializable {
     public Analysisresult() {
     }
 
-    public Analysisresult( Date date, Analysis analysisId, Patient patientId, Doctor doctorId) {
+    public Analysisresult(Date date, Analysis analysisId, Patient patientId, Doctor doctorId) {
         this.date = date;
         this.analysisId = analysisId;
         this.patientId = patientId;
         this.doctorId = doctorId;
-        
-        if(analysisId instanceof BloodAnalysis){
+
+        if (analysisId instanceof BloodAnalysis) {
             analysisType = "Blood Analysis";
-        }else if(analysisId instanceof UrineAnalysis){
+        } else if (analysisId instanceof UrineAnalysis) {
             analysisType = "Urine Analysis";
         }
-        
+
     }
-    
-    
 
     public Analysisresult(Integer id) {
         this.id = id;
@@ -146,7 +160,7 @@ public class Analysisresult implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa_Core.Analysisresult[ id=" + id + " ]";
+        return "Date :" + date.toString() + " ID :" + id;
     }
 
 }

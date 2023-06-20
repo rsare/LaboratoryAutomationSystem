@@ -1,8 +1,6 @@
 package LaboratoryAutomationSystem;
 
-import CorePackage.Database;
-import CorePackage.Doctor;
-import CorePackage.LabAttendant;
+import jpa_Core.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -10,25 +8,24 @@ import javax.swing.JOptionPane;
  * @author sare
  */
 public class AuthenticationPageForDoctor extends javax.swing.JFrame {
-
+    
     String name;
     String surname;
     String username;
     String password;
-    String phoneNo;
-
-    public AuthenticationPageForDoctor(String name, String surname, String username, String password, String phoneNo) {
+    
+    
+    public AuthenticationPageForDoctor(String name, String surname, String username, String password) {
         initComponents();
         setLocationRelativeTo(null);
-
+        
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
-        this.phoneNo = phoneNo;
         
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -89,30 +86,29 @@ public class AuthenticationPageForDoctor extends javax.swing.JFrame {
     private void authenticationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authenticationButtonActionPerformed
         String authenticationPasswordForDoctor = "123";
         LoginAndRegisterPage loginAndRegister = new LoginAndRegisterPage();
-
+        
         if (txtAuthentication.getText().equals(authenticationPasswordForDoctor)) {
-
+            
             JOptionPane.showMessageDialog(this, "Successfully Created Doctor Account ",
                     "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
-
-            Doctor doctor = new Doctor(loginAndRegister.txtName.getText(), loginAndRegister.txtSurname.getText(),
-                    password, username,
-                    loginAndRegister.txtPhoneNo.getText());
-            Database.getPeople().add(doctor);
-
+            
+            Doctor doctor = new Doctor(name, surname,username, password);
+            
+            Database.saveUser(doctor);
+            
             loginAndRegister.show();
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Your authentication code is incorrect. For security you are redirected to registration and login page. ",
                     "Wrong Authentication Code", JOptionPane.ERROR_MESSAGE);
-
+            
             loginAndRegister.show();
             dispose();
         }
     }//GEN-LAST:event_authenticationButtonActionPerformed
-
+    
     public static void main(String args[]) {
-
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -135,7 +131,7 @@ public class AuthenticationPageForDoctor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
             }
         });
     }
